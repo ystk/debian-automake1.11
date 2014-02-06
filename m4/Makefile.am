@@ -2,26 +2,28 @@
 
 ## Makefile for Automake m4.
 
-## Copyright (C) 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006,
-## 2008, 2009 Free Software Foundation, Inc.
+# Copyright (C) 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006,
+# 2008, 2009, 2011, 2012 Free Software Foundation, Inc.
 
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2, or (at your option)
-## any later version.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
 
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 
-## You should have received a copy of the GNU General Public License
-## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-m4datadir = $(datadir)/aclocal-$(APIVERSION)
+automake_acdir = $(datadir)/aclocal-$(APIVERSION)
+system_acdir = $(datadir)/aclocal
 
-dist_m4data_DATA = \
+dist_automake_ac_DATA = \
 $(top_srcdir)/m4/amversion.m4 \
+ar-lib.m4 \
 as.m4 \
 auxdir.m4 \
 ccstdc.m4 \
@@ -59,7 +61,10 @@ tar.m4 \
 upc.m4 \
 vala.m4
 
-EXTRA_DIST = dirlist amversion.in
+# So that $(system_acdir) will be created by "make install".
+dist_system_ac_DATA =
+
+EXTRA_DIST = acdir/dirlist amversion.in
 
 # We build amversion.m4 here, instead of from config.status,
 # because config.status is rerun each time one of configure's
@@ -68,10 +73,10 @@ EXTRA_DIST = dirlist amversion.in
 # loop otherwise.
 # Use `$(top_srcdir)/m4' for the benefit of non-GNU makes: this is
 # how amversion.m4 appears in our dependencies.
-$(top_srcdir)/m4/amversion.m4: $(srcdir)/amversion.in
-	sed -e 's,[@]VERSION[@],$(VERSION),g' \
+$(top_srcdir)/m4/amversion.m4: $(top_srcdir)/configure.ac $(srcdir)/amversion.in
+	$(AM_V_at)sed \
+	    -e 's,[@]VERSION[@],$(VERSION),g' \
 	    -e 's,[@]APIVERSION[@],$(APIVERSION),g' \
 	    -e "s,[@]configure_input[@],Generated from amversion.in; do not edit by hand.,g" \
-	    $(srcdir)/amversion.in > $@t
-	chmod a-w $@t
-	mv -f $@t $@
+	    $(srcdir)/amversion.in > $@-t
+	@$(AM_V_at)chmod a-w $@-t && mv -f $@-t $@

@@ -1,5 +1,5 @@
 #! /bin/sh
-# Copyright (C) 2002, 2007  Free Software Foundation, Inc.
+# Copyright (C) 2002, 2007, 2010, 2012 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,8 +45,15 @@ END
 
 $ACLOCAL
 $AUTOCONF
-$AUTOMAKE --copy --add-missing
-./configure --prefix "`pwd`/inst"
+$AUTOMAKE -Wno-extra-portability --copy --add-missing
+
+# We pass '--libdir' explicitly, to avoid spurious failures due to users
+# or distributions possibly overriding '${libdir}' in their $CONFIG_SITE
+# file (for example, defining it to '${prefix}/lib64' on 64-bit systems,
+# as is the case with openSUSE 12.1).  See automake bug#10426.
+cwd=`pwd` || Exit 99
+./configure --prefix "$cwd/inst" --libdir "$cwd/inst/lib"
+
 $MAKE
 
 test -f subdir/liba.a
@@ -66,3 +73,5 @@ $MAKE install-strip
 
 test -f inst/lib/liba.a
 test -f inst/lib/subdir/libb.a
+
+:

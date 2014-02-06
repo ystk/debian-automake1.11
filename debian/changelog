@@ -1,3 +1,60 @@
+automake1.11 (1:1.11.6-1) unstable; urgency=low
+
+  * New upstream release. Fixes CVE-2012-3386 "Temporary worldwide write
+    permissions during make distcheck". (Closes: #681097)
+
+ -- Eric Dorland <eric@debian.org>  Tue, 10 Jul 2012 16:24:23 -0400
+
+automake1.11 (1:1.11.5-2) unstable; urgency=low
+
+  * debian/watch: Update to include on automake1.11 versions.
+  * debian/control: Add autopoint to build depends, to fix test
+    failure. (Closes: #668630)
+  * debian/patches/02-compile_f90_c_cxx-fix.diff: Add fix for
+    test. (Closes: #674387)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 03 Jun 2012 03:38:38 -0400
+
+automake1.11 (1:1.11.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Upgrade Standards-Version 3.9.3.
+
+ -- Eric Dorland <eric@debian.org>  Fri, 13 Apr 2012 23:27:35 -0400
+
+automake1.11 (1:1.11.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/automake.dirs: Add /usr/share/aclocal since aclocal expects it
+    to exist. (Closes: #659482)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 08 Apr 2012 01:48:37 -0400
+
+automake1.11 (1:1.11.3-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #657982)
+  * debian/control: Add Multi-Arch: foreign. Thanks Sebastien
+    Bacher. (Closes: #658477)
+  * debian/patches/01-texi-rename.diff: Refresh patch.
+  * debian/control: Build-Depend on install-info to satisfy test.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 05 Feb 2012 01:21:12 -0500
+
+automake1.11 (1:1.11.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Standards-Version to 3.9.2.0.
+  * doc/automake.texi, debian/patches/01-texi-rename.diff,
+    debian/patches/series: Move texi file patch into a quilt patch.
+  * debian/source/patch-header, debian/source/options: Remove
+    single-debian-patch option and patch-header.
+  * lib/Automake/Makefile.am: Remove spurious diff.
+  * debian/automake.dirs: Remove unneeded dirs file.
+  * debian/automake.doc-base: Fix section.
+  * debian/control: Drop article from description.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 15 Jan 2012 01:16:47 -0500
+
 automake1.11 (1:1.11.1-1) unstable; urgency=low
 
   * New upstream release. Contains fix for CVE-2009-4029, which created

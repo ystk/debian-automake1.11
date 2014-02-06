@@ -17,12 +17,13 @@
 
 
 ## This dummy rule is called from subdirectories whenever one of the
-## top-level Makefile's dependencies must be updated.  It does not
-## need to depend on %MAKEFILE% because GNU make will always make sure
-## %MAKEFILE% is updated before considering the am--refresh target.
+## top-level Makefile's dependencies must be updated.  It does depend
+## on %MAKEFILE% for the benefit of non-GNU make implementations (GNU
+## make will always make sure %MAKEFILE% is updated before considering
+## the am--refresh target anyway).
 if %?TOPDIR_P%
 .PHONY: am--refresh
-am--refresh:
+am--refresh: %MAKEFILE%
 	@:
 endif %?TOPDIR_P%
 
@@ -81,6 +82,9 @@ endif %?TOPDIR_P%
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status %CONFIG-MAKEFILE% $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status %CONFIG-MAKEFILE% $(am__depfiles_maybe);; \
 	esac;
+
+## Avoid the "deleted header file" problem for the dependencies.
+?HAVE-MAKEFILE-IN-DEPS?%MAKEFILE-IN-DEPS%:
 
 DIST_COMMON += %MAKEFILE-AM%
 
