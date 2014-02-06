@@ -16,7 +16,7 @@
 
 # Test Automake style tests.
 
-. ./defs-p || Exit 1
+parallel_tests=yes; . ./defs || Exit 1
 
 set -e
 
@@ -29,8 +29,8 @@ END
 $ACLOCAL
 $AUTOMAKE
 
-grep '^check-TESTS:' Makefile.in
-grep '^check-DEJAGNU' Makefile.in && Exit 1
+grep 'check-TESTS.*:' Makefile.in
+grep 'check-DEJAGNU' Makefile.in && Exit 1
 
 # check-TESTS is phony.
 sed -n '/^\.PHONY:/,/^$/p' Makefile.in | grep check-TESTS
