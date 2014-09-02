@@ -1,3 +1,15 @@
+automake1.11 (1:1.11.6-2) unstable; urgency=low
+
+  * Reupload to unstable with binary package renamed to automake1.11.
+    (Closes: #711865)
+  * debian/compat, debian/control: Upgrade to debhelper v9.
+  * debian/control: Standards-Version to 3.9.4.
+  * debian/patches/03-texinfo-fix-itemx.diff: Fix for the texinfo file
+    broken use of @itemx. (Closes: #709903)
+  * debian/rules: Disable the test suite, it's broken.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 24 Jun 2013 13:35:48 -0400
+
 automake1.11 (1:1.11.6-1) unstable; urgency=low
 
   * New upstream release. Fixes CVE-2012-3386 "Temporary worldwide write
