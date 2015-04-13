@@ -1,3 +1,15 @@
+automake1.11 (1:1.11.6-3) unstable; urgency=medium
+
+  * debian/copyright: New DEP-5 copyright file.
+  * debian/control: Standards-Version to 3.9.6 (no changes).
+  * debian/control: Canonicalize Vcs-* fields.
+  * debian/automake1.11.prerm, debian/automake1.11.postinst: Use set -e
+    instead of -e on the hash bang line.
+  * debian/patches/01-texi-rename.diff: Add DEP3 headers.
+  * debian/control, debian/copyright: Run wrap-and-sort.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 19 Oct 2014 20:14:01 -0400
+
 automake1.11 (1:1.11.6-2) unstable; urgency=low
 
   * Reupload to unstable with binary package renamed to automake1.11.
